@@ -1,0 +1,9 @@
+coinbase-agentkit-core
+langchain
+langchain-openai
+openai
+web3
+python-dotenv
+requests
+schedule
+push-protocol

@@ -1,0 +1,38 @@
+# Environment variables
+.env
+.env.local
+
+# Node modules
+node_modules/
+package-lock.json
+
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+
+# Hardhat
+cache/
+artifacts/
+coverage/
+typechain/
+typechain-types/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build outputs
+dist/
+build/
+*.log
