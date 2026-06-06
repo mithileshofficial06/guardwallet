@@ -1,4 +1,10 @@
-export default function DailyBudget({ budget, spent, remaining }) {
+interface DailyBudgetProps {
+  budget: number;
+  spent: number;
+  remaining: number;
+}
+
+export default function DailyBudget({ budget, spent, remaining }: DailyBudgetProps) {
   const percentage = (spent / budget) * 100;
 
   return (

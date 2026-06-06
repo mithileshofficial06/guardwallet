@@ -1,13 +1,18 @@
+"use client";
+
 import { useState } from 'react';
 
-export default function VaultSetup({ onComplete }) {
+interface VaultSetupProps {
+  onComplete: () => void;
+}
+
+export default function VaultSetup({ onComplete }: VaultSetupProps) {
   const [step, setStep] = useState(1);
   const [survivalMinimum, setSurvivalMinimum] = useState('');
   const [trustedCircle, setTrustedCircle] = useState(['', '', '']);
   const [autopays, setAutopays] = useState([{ name: '', amount: '', date: '' }]);
 
   const handleSubmit = () => {
-    // Contract interaction here
     console.log('Creating vault...');
     onComplete();
   };
@@ -16,11 +21,11 @@ export default function VaultSetup({ onComplete }) {
     <div className="max-w-2xl mx-auto">
       <div className="bg-white rounded-lg shadow-lg p-8">
         <div className="mb-8">
-          <div className="flex justify-between items-center mb-4">
+          <div className="flex justify-between items-center mb-4 space-x-2">
             {[1, 2, 3].map((s) => (
               <div
                 key={s}
-                className={`w-1/3 h-2 rounded ${
+                className={`flex-1 h-2 rounded ${
                   s <= step ? 'bg-indigo-600' : 'bg-gray-200'
                 }`}
               />

@@ -1,5 +1,9 @@
-export default function ReputationBadge({ cycles }) {
-  const getBadge = (cycles) => {
+interface ReputationBadgeProps {
+  cycles: number;
+}
+
+export default function ReputationBadge({ cycles }: ReputationBadgeProps) {
+  const getBadge = (cycles: number) => {
     if (cycles >= 12) return { name: 'Gold', color: 'yellow', emoji: '🏆' };
     if (cycles >= 6) return { name: 'Silver', color: 'gray', emoji: '🥈' };
     return { name: 'Bronze', color: 'orange', emoji: '🥉' };

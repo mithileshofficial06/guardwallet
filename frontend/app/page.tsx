@@ -1,12 +1,12 @@
-import { useState, useEffect } from 'react';
-import { WagmiConfig, createConfig, useAccount, useConnect, useDisconnect } from 'wagmi';
-import { polygon, polygonMumbai } from 'wagmi/chains';
-import { RainbowKitProvider, connectorsForWallets, getDefaultWallets } from '@rainbow-me/rainbowkit';
-import Dashboard from './components/Dashboard';
-import VaultSetup from './components/VaultSetup';
-import '@rainbow-me/rainbowkit/styles.css';
+"use client";
 
-function App() {
+import { useAccount } from "wagmi";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { useState } from "react";
+import Dashboard from "@/components/Dashboard";
+import VaultSetup from "@/components/VaultSetup";
+
+export default function Home() {
   const { address, isConnected } = useAccount();
   const [hasVault, setHasVault] = useState(false);
 
@@ -21,17 +21,7 @@ function App() {
             <h1 className="text-2xl font-bold text-gray-900">GuardWallet</h1>
           </div>
           
-          {isConnected ? (
-            <div className="flex items-center space-x-4">
-              <span className="text-sm text-gray-600">
-                {address?.slice(0, 6)}...{address?.slice(-4)}
-              </span>
-            </div>
-          ) : (
-            <button className="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700">
-              Connect Wallet
-            </button>
-          )}
+          <ConnectButton />
         </div>
       </nav>
 
@@ -44,18 +34,16 @@ function App() {
             <p className="text-xl text-gray-600 mb-8">
               AI-powered protection for your recurring payments
             </p>
-            <button className="bg-indigo-600 text-white px-8 py-3 rounded-lg text-lg hover:bg-indigo-700">
-              Get Started
-            </button>
+            <div className="flex justify-center">
+              <ConnectButton />
+            </div>
           </div>
         ) : !hasVault ? (
           <VaultSetup onComplete={() => setHasVault(true)} />
         ) : (
-          <Dashboard address={address} />
+          <Dashboard address={address as string} />
         )}
       </main>
     </div>
   );
 }
-
-export default App;

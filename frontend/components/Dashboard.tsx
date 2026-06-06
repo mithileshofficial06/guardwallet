@@ -1,14 +1,16 @@
-import { useState, useEffect } from 'react';
-import { useContractRead } from 'wagmi';
+"use client";
+
+import { useState } from 'react';
 import DailyBudget from './DailyBudget';
 import AutopayList from './AutopayList';
 import YieldTracker from './YieldTracker';
 import ReputationBadge from './ReputationBadge';
 
-export default function Dashboard({ address }) {
-  const [vaultData, setVaultData] = useState(null);
-  const [dailyBudget, setDailyBudget] = useState(0);
+interface DashboardProps {
+  address: string;
+}
 
+export default function Dashboard({ address }: DashboardProps) {
   return (
     <div className="space-y-6">
       {/* Header Stats */}
@@ -76,14 +78,14 @@ export default function Dashboard({ address }) {
   );
 }
 
-function StatCard({ title, value, subtitle, color }) {
-  const colors = {
-    green: 'bg-green-50 text-green-600',
-    blue: 'bg-blue-50 text-blue-600',
-    purple: 'bg-purple-50 text-purple-600',
-    yellow: 'bg-yellow-50 text-yellow-600',
-  };
+interface StatCardProps {
+  title: string;
+  value: string;
+  subtitle: string;
+  color: 'green' | 'blue' | 'purple' | 'yellow';
+}
 
+function StatCard({ title, value, subtitle, color }: StatCardProps) {
   return (
     <div className="bg-white rounded-lg shadow p-6">
       <p className="text-sm text-gray-600 mb-1">{title}</p>
@@ -93,7 +95,12 @@ function StatCard({ title, value, subtitle, color }) {
   );
 }
 
-function Insight({ type, message }) {
+interface InsightProps {
+  type: 'success' | 'warning' | 'info';
+  message: string;
+}
+
+function Insight({ type, message }: InsightProps) {
   const colors = {
     success: 'bg-green-50 border-green-200 text-green-800',
     warning: 'bg-yellow-50 border-yellow-200 text-yellow-800',

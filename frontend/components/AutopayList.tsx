@@ -1,4 +1,8 @@
-export default function AutopayList({ address }) {
+interface AutopayListProps {
+  address: string;
+}
+
+export default function AutopayList({ address }: AutopayListProps) {
   const autopays = [
     { name: 'Rent', amount: 1200, date: '2026-12-01', status: 'protected', daysUntil: 5 },
     { name: 'Netflix', amount: 15, date: '2026-11-28', status: 'protected', daysUntil: 2 },
