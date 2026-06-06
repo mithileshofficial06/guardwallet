@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.20;
+pragma solidity ^0.8.24;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
@@ -20,7 +20,7 @@ contract ReputationNFT is ERC721, Ownable {
     event ScoreUpdated(address indexed user, uint256 tokenId, uint256 newScore);
     event PaymentRecorded(address indexed user, bool onTime);
     
-    constructor() ERC721("GuardWallet Credit Score", "GWCS") {}
+    constructor() ERC721("GuardWallet Credit Score", "GWCS") Ownable(msg.sender) {}
     
     function mintCreditScore(address user) external onlyOwner returns(uint256) {
         require(userTokenId[user] == 0, "Already has NFT");
@@ -92,13 +92,9 @@ contract ReputationNFT is ERC721, Ownable {
     }
     
     // Soulbound - non-transferrable
-    function _beforeTokenTransfer(
-        address from,
-        address to,
-        uint256 tokenId,
-        uint256 batchSize
-    ) internal virtual override {
+    function _update(address to, uint256 tokenId, address auth) internal virtual override returns (address) {
+        address from = _ownerOf(tokenId);
         require(from == address(0), "Soulbound: Transfer not allowed");
-        super._beforeTokenTransfer(from, to, tokenId, batchSize);
+        return super._update(to, tokenId, auth);
     }
 }

@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.20;
+pragma solidity ^0.8.24;
 
 import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
+import "@openzeppelin/contracts/utils/cryptography/MessageHashUtils.sol";
 
 /**
  * @title AccountAbstraction
@@ -10,6 +11,7 @@ import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
  */
 contract AccountAbstraction {
     using ECDSA for bytes32;
+    using MessageHashUtils for bytes32;
     
     struct UserAccount {
         address owner;

@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.20;
+pragma solidity ^0.8.24;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@aave/core-v3/contracts/interfaces/IPool.sol";
 
@@ -55,7 +55,7 @@ contract GuardVault is ReentrancyGuard, Ownable {
     event DailyBudgetCalculated(address indexed user, uint256 dailyBudget, uint256 daysRemaining);
     event ProtectionCycleCompleted(address indexed user, uint256 cycleNumber);
     
-    constructor(address _usdc, address _aavePool) {
+    constructor(address _usdc, address _aavePool) Ownable(msg.sender) {
         usdc = IERC20(_usdc);
         aavePool = IPool(_aavePool);
     }
@@ -117,7 +117,7 @@ contract GuardVault is ReentrancyGuard, Ownable {
             vault.protectedBalance += protectAmount;
             usdc.approve(address(aavePool), protectAmount);
             aavePool.supply(address(usdc), protectAmount, address(this), 0);
-            emit FundsProtected(msg.sender, protectAmount);
+            emit FundsProtected(msg.sender, protectAmount, "Deposit protection");
         }
     }
     
