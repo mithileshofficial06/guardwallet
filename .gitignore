@@ -1,19 +1,42 @@
-# Environment variables
+# Environment Variables
 .env
 .env.local
+.env.*.local
+.env.production
+.env.development
 
-# Node modules
+# Dependencies
 node_modules/
 package-lock.json
+yarn.lock
+pnpm-lock.yaml
 
 # Python
 venv/
+env/
+ENV/
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
 .Python
 *.egg-info/
+dist/
+build/
+*.egg
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# OS
+Thumbs.db
+.DS_Store
+*.log
 
 # Hardhat
 cache/
@@ -22,17 +45,41 @@ coverage/
 typechain/
 typechain-types/
 
-# IDEs
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# OS
-.DS_Store
-Thumbs.db
+# Next.js
+.next/
+out/
+*.tsbuildinfo
+next-env.d.ts
 
 # Build outputs
 dist/
 build/
+
+# Logs
+logs/
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+pnpm-debug.log*
+
+# Testing
+coverage/
+.nyc_output/
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Secrets & Keys
+*.key
+*.pem
+.secret
+secrets/
+
+# Backup files
+*.backup
+*.bak
+*.old
